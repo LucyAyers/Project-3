@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function AssignmentPlanner() {
     const [assignmentName, setAssignmentName] = useState('');
