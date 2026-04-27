@@ -1,18 +1,15 @@
 import React from 'react';
-import AssignmentPlanner from './AssignmentPlanner';
+//import AssignmentPlanner from './AssignmentPlanner';
+import AssignmentForm from './components/AssignmentForm';
+import AssignmentList from './components/AssignmentList';
 
-const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="AssignmentPlanner"
-          component={AssignmentPlanner}
-          options={{ title: 'Assignment Planner' }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <div>
+      <h1>Study Planner</h1>
+      <AssignmentForm />
+      <AssignmentList />
+    </div>
   );
 }
