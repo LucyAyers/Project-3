@@ -7,16 +7,25 @@ function AssignmentList() {
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
-  const unsubscribe = onSnapshot(collection(db, "assignments"), (snapshot) => {
-    const data = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
-    setAssignments(data);
-  });
+    const unsubscribe = onSnapshot(collection(db, "assignments"), (snapshot) => {
+      const data = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
 
-  return () => unsubscribe(); // cleanup when component unmounts
-}, []);
+      // ✅ SORT GOES HERE (inside the callback)
+      data.sort((a, b) => {
+        if (a.completed !== b.completed) {
+          return a.completed - b.completed;
+        }
+        return new Date(a.dueDate) - new Date(b.dueDate);
+      });
+
+      setAssignments(data);
+    });
+
+    return () => unsubscribe(); // cleanup
+  }, []);
 
   return (
     <div>
