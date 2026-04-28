@@ -13,7 +13,6 @@ function AssignmentList() {
         ...doc.data()
       }));
 
-      // ✅ SORT GOES HERE (inside the callback)
       data.sort((a, b) => {
         if (a.completed !== b.completed) {
           return a.completed - b.completed;
@@ -24,11 +23,11 @@ function AssignmentList() {
       setAssignments(data);
     });
 
-    return () => unsubscribe(); // cleanup
+    return () => unsubscribe();
   }, []);
 
   return (
-    <div>
+    <div className="container mt-4">
       {assignments.map((a) => (
         <AssignmentItem key={a.id} assignment={a} />
       ))}

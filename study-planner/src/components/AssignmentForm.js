@@ -20,7 +20,6 @@ function AssignmentForm() {
 
       console.log("Assignment added!");
 
-      // clear form
       setTitle("");
       setDueDate("");
       setClassName("");
@@ -30,8 +29,9 @@ function AssignmentForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="container mt-4 col-md-6">
       <input
+        className="form-control mb-2"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
@@ -39,17 +39,19 @@ function AssignmentForm() {
 
       <input
         type="date"
+        className="form-control mb-2"
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
       />
 
       <input
+        className="form-control mb-2"
         value={className}
         onChange={(e) => setClassName(e.target.value)}
         placeholder="Class"
       />
 
-      <button type="submit">Add</button>
+      <button className="btn btn-primary w-100" type="submit">Add</button>
     </form>
   );
 }

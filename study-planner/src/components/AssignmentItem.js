@@ -21,21 +21,41 @@ const AssignmentItem = ({ assignment }) => {
     }
   };
 
+  const isDueTomorrow = () => {
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    const due = new Date(assignment.dueDate + "T00:00:00");
+
+    return (
+      due.getFullYear() === tomorrow.getFullYear() &&
+      due.getMonth() === tomorrow.getMonth() &&
+      due.getDate() === tomorrow.getDate()
+    );
+  };
+
   return (
-    <div style={{ border: "1px solid gray", padding: "10px", margin: "10px 0" }}>
-      <h3 style={{ textDecoration: assignment.completed ? "line-through" : "none" }}>
-        {assignment.title}
-      </h3>
-      <p>Due: {assignment.dueDate}</p>
-      <p>Class: {assignment.className}</p>
+    <div className={`card mb-3 
+      ${assignment.completed ? "bg-secondary bg-opacity-25 border border-secondary"
+      : isDueTomorrow() ? "bg-danger bg-opacity-10 border border-danger" : ""
+      }
+`    }>
+      <div className="card-body">
+        <h3 style={{ textDecoration: assignment.completed ? "line-through" : "none" }}>
+          {assignment.title}
+        </h3>
+        <p>Due: {assignment.dueDate}</p>
+        <p>Class: {assignment.className}</p>
 
-      <button onClick={handleComplete} disabled={assignment.completed}>
-        {assignment.completed ? "Completed" : "Mark Complete"}
-      </button>
+        <button className="btn btn-success btn-sm me-2" onClick={handleComplete} disabled={assignment.completed}>
+          {assignment.completed ? "Completed" : "Mark Complete"}
+        </button>
 
-      <button onClick={handleDelete} style={{ marginLeft: "10px" }}>
-        Delete
-      </button>
+        <button className="btn btn-danger btn-sm" onClick={handleDelete} style={{ marginLeft: "10px" }}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
